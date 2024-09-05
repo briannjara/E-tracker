@@ -1,0 +1,65 @@
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
+import { Menu, X } from 'lucide-react'
+import { UserButton } from '@clerk/nextjs'
+import SearchBar from '../../../_components/SearchBar'
+import Logo from '../../../_components/Logo'
+
+function DashboardHeader() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const menuList = [
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "Budget", path: "/dashboard/budgets" },
+    { name: "Expenses", path: "/dashboard/expenses" },
+    { name: "Chat AI", path: "/dashboard/chatai" }
+  ]
+
+  const handleSearch = async (searchTerm) => {
+    if (searchTerm.trim()) {
+      router.push(`/dashboard/search?q=${encodeURIComponent(searchTerm)}`);
+    }
+  };
+
+  return (
+    <div className='md:hidden sticky top-0 z-10 bg-white p-4 shadow-md'>
+      <div className='flex justify-between items-center'>
+        <div className='flex items-center gap-4'>
+          <button
+            className='text-gray-600 hover:text-gray-900'
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          <Logo />
+        </div>
+        <div className='flex items-center gap-4'>
+          <UserButton afterSignOutUrl="/" />
+        </div>
+      </div>
+      
+      {isMenuOpen && (
+        <div className='mt-4'>
+          <div className='mb-4'>
+            <SearchBar onSearch={handleSearch} />
+          </div>
+          {menuList.map((item, index) => (
+            <Link 
+              key={index} 
+              href={item.path}
+              className={`block py-2 px-4 rounded-md ${pathname === item.path ? 'bg-blue-100 text-primary font-medium' : 'hover:bg-gray-100'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default DashboardHeader
