@@ -3,18 +3,21 @@ import React from 'react'
 
 function BarChartDashboard({ budgetList }) {
   return (
-    <div className='border p-5 rounded-lg'>
-        <h2 className='text-2xl font-bold'>Budget Overview</h2>
-        <ResponsiveContainer width={'80%'} height={300}>
-      <BarChart  margin={{ top: 5, right: 5, left: 5, bottom: 5 }} data={budgetList}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="totalSpend" stackId="a" fill="#4845d2" />
-        <Bar dataKey="amount" stackId="a" fill="#c3c2ff" />
-      </BarChart>
+    <div className='h-80 w-full'>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={budgetList} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+          <XAxis dataKey="name" stroke="#9CA3AF" />
+          <YAxis stroke="#9CA3AF" />
+          <Tooltip 
+            contentStyle={{ backgroundColor: '#1F2937', border: '1px solid #374151', borderRadius: '0.5rem' }}
+            labelStyle={{ color: '#E5E7EB' }}
+            itemStyle={{ color: '#9CA3AF' }}
+          />
+          <Legend wrapperStyle={{ color: '#9CA3AF' }} />
+          <Bar dataKey="totalSpend" name="Spent" fill="#3B82F6" />
+          <Bar dataKey="amount" name="Budget" fill="#10B981" />
+        </BarChart>
       </ResponsiveContainer>
     </div>
   )

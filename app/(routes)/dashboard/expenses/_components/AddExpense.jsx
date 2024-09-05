@@ -13,11 +13,19 @@ const AddExpense = ({budgetId, user, refreshData, budgetInfo}) => {
   const [amount, setAmount] = useState("");
   const [Loading, setLoading] = useState(false);
 
-  const isBudgetFull = budgetInfo && budgetInfo.totalSpend >= budgetInfo.amount;
+  // Convert budgetInfo values to numbers and handle potential undefined values
+  const totalSpend = Number(budgetInfo?.totalSpend || 0);
+  const budgetAmount = Number(budgetInfo?.amount || 0);
+
+  // Calculate remaining budget
+  const remainingBudget = budgetAmount - totalSpend;
+
+  // Check if adding the new expense would exceed the budget
+  const wouldExceedBudget = (Number(amount) || 0) > remainingBudget;
 
   const addNewExpense = async () => {
-    if (isBudgetFull) {
-      toast.error("Budget limit reached. Cannot add more expenses.", {
+    if (wouldExceedBudget) {
+      toast.error("This expense would exceed your budget limit.", {
         icon: <AlertCircle className="text-red-500" />,
       });
       return;
@@ -58,10 +66,10 @@ const AddExpense = ({budgetId, user, refreshData, budgetInfo}) => {
   return (
     <div className="border rounded-lg p-5">
       <h2 className="text-xl font-bold">Add Expense</h2>
-      {isBudgetFull && (
+      {wouldExceedBudget && (
         <div className="mt-2 mb-4 text-red-500 flex items-center">
           <AlertCircle className="mr-2" size={16} />
-          <span className="text-sm">Budget limit reached. Edit budget to add more expenses.</span>
+          <span className="text-sm">This expense would exceed your budget limit.</span>
         </div>
       )}
       <div>
@@ -82,7 +90,7 @@ const AddExpense = ({budgetId, user, refreshData, budgetInfo}) => {
           value={amount}
         />
       </div>
-      <Button disabled={!name || !amount || Loading || isBudgetFull}
+      <Button disabled={!name || !amount || Loading || wouldExceedBudget}
       onClick={()=>addNewExpense()}
        className="w-full mt-5">
         {Loading ? <Loader className="animate-spin" /> : "Add New Expense"}</Button>

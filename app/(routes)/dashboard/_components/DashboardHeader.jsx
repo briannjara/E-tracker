@@ -25,11 +25,11 @@ function DashboardHeader() {
   };
 
   return (
-    <div className='md:hidden sticky top-0 z-10 bg-white p-4 shadow-md'>
+    <div className='md:hidden sticky top-0 z-10 bg-gray-900 p-4 shadow-md'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center gap-4'>
           <button
-            className='text-gray-600 hover:text-gray-900'
+            className='text-gray-300 hover:text-white'
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -50,7 +50,7 @@ function DashboardHeader() {
             <Link 
               key={index} 
               href={item.path}
-              className={`block py-2 px-4 rounded-md ${pathname === item.path ? 'bg-blue-100 text-primary font-medium' : 'hover:bg-gray-100'}`}
+              className={`block py-2 px-4 rounded-md ${pathname === item.path ? 'bg-blue-600 text-white font-medium' : 'text-gray-300 hover:bg-gray-800'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {item.name}

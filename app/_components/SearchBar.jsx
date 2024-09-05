@@ -13,14 +13,12 @@ const SearchBar = ({ onSearch }) => {
     <form onSubmit={handleSubmit} className="relative">
       <input
         type="text"
+        placeholder="Search..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search...Expense"
-        className="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-full focus:outline-none focus:border-blue-500"
+        className="w-full bg-gray-800 text-white border border-gray-700 rounded-lg py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <button type="submit" className="absolute top-0 left-0 mt-3 ml-3">
-        <Search className="w-4 h-4 text-gray-400" />
-      </button>
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
     </form>
   );
 };

@@ -37,7 +37,6 @@ function ChatAi() {
           })),
         });
 
-        // Include the entire conversation history in the context
         const conversationHistory = messages.map(msg => `${msg.sender === 'user' ? 'User' : 'Fin'}: ${msg.text}`).join('\n');
         const fullPrompt = `${aiPersonality}\n\nConversation history:\n${conversationHistory}\n\nUser: ${input}`;
 
@@ -53,25 +52,37 @@ function ChatAi() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-theme(spacing.16))] bg-gray-50">
-      <h1 className="text-2xl font-bold mb-4 p-4 bg-white shadow">Chat with Fin</h1>
-      <div className="flex-1 overflow-y-auto mb-4 px-4">
+    <div className="flex flex-col h-[calc(100vh-theme(spacing.16))] bg-gray-900 text-white">
+      <h1 className="text-3xl font-bold mb-6 p-6 bg-gray-800 shadow-md">Chat with Fin</h1>
+      <div className="flex-1 overflow-y-auto mb-4 px-6">
         {messages.length === 0 && (
-          <div className="text-center text-gray-500 mt-8">
-            <Bot size={48} className="mx-auto mb-4" />
-            <p>Hi, I'm Fin! How can I help with your finances today?</p>
+          <div className="text-center text-gray-400 mt-8">
+            <Bot size={64} className="mx-auto mb-4 text-blue-500" />
+            <p className="text-xl">Hi, I'm Fin! How can I help with your finances today?</p>
           </div>
         )}
         {messages.map((message, index) => (
           <div key={index} className={`flex items-start mb-4 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[70%] p-3 rounded-lg ${message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-white text-black shadow'}`}>
+            <div className={`max-w-[70%] p-4 rounded-lg ${
+              message.sender === 'user' 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-800 text-gray-200 border border-gray-700'
+            }`}>
+              <div className="flex items-center mb-2">
+                {message.sender === 'user' ? (
+                  <User size={20} className="mr-2 text-gray-300" />
+                ) : (
+                  <Bot size={20} className="mr-2 text-blue-400" />
+                )}
+                <span className="font-semibold">{message.sender === 'user' ? 'You' : 'Fin'}</span>
+              </div>
               <p>{message.text}</p>
             </div>
           </div>
         ))}
         <div ref={messagesEndRef} />
       </div>
-      <form onSubmit={handleSubmit} className="p-4 bg-white shadow">
+      <form onSubmit={handleSubmit} className="p-4 bg-gray-800 border-t border-gray-700">
         <div className="flex gap-2">
           <input
             ref={inputRef}
@@ -79,12 +90,12 @@ function ChatAi() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask Fin about your finances..."
-            className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={isLoading}
           />
           <button 
             type="submit" 
-            className={`bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={isLoading}
           >
             <Send size={20} />

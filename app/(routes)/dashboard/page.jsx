@@ -10,6 +10,7 @@ import BarChartDashboard from "./_components/BarChartDashboard";
 import { BudgetItem } from "./budgets/_components/BudgetItem";
 import ExpensesListTable from "./../dashboard/expenses/_components/ExpenseListTable";
 import Link from "next/link";
+import { PieChart, CreditCard, ArrowUpRight, MessageSquare } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -65,17 +66,17 @@ const Dashboard = () => {
   }, [getBudgetList, getExpensesList]);
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-full">Loading...</div>;
+    return <div className="flex justify-center items-center h-screen bg-gray-900 text-white text-xl font-semibold">Loading...</div>;
   }
 
   if (budgetList.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <h2 className="text-2xl font-semibold mb-4">Welcome to Your Dashboard!</h2>
-        <p className="text-lg text-gray-600 mb-8">It looks like you haven't created any budgets yet.</p>
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+        <h2 className="text-3xl font-bold mb-4">Welcome to Your Dashboard!</h2>
+        <p className="text-xl text-gray-300 mb-8">It looks like you haven't created any budgets yet.</p>
         <Link 
           href="/dashboard/budgets" 
-          className="px-6 py-3 bg-primary text-white font-medium rounded-full text-lg shadow-lg hover:bg-blue-700 transition duration-300"
+          className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-full text-lg shadow-lg hover:bg-blue-700 transition duration-300"
         >
           Create Your First Budget
         </Link>
@@ -84,31 +85,60 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-      
-      <CardInfo budgetList={budgetList} />
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Budget Overview</h2>
-          <BarChartDashboard budgetList={budgetList} />
+    <div className="bg-gray-900 min-h-screen text-white">
+      <main className="p-6 md:p-10">
+        <div className="bg-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-700">
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+            Welcome back, {user.firstName}!
+          </h1>
+          <p className="text-xl text-gray-300">Here's a summary of your finances</p>
+        </div>
+
+        <CardInfo budgetList={budgetList} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+            <h2 className="text-2xl font-bold mb-6 text-blue-400">Budget Overview</h2>
+            <BarChartDashboard budgetList={budgetList} />
+          </div>
+          
+          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+            <h2 className="text-2xl font-bold mb-6 text-green-400">Recent Expenses</h2>
+            <ExpensesListTable expensesList={expensesList.slice(0, 5)} />
+          </div>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Recent Expenses</h2>
-          <ExpensesListTable expensesList={expensesList} />
+        <div className="mt-10 bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+          <h2 className="text-2xl font-bold mb-6 text-purple-400">Your Budgets</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {budgetList.map((budget, index) => (
+              <BudgetItem budget={budget} key={index} />
+            ))}
+          </div>
         </div>
-      </div>
-      
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Your Budgets</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {budgetList.map((budget, index) => (
-            <BudgetItem budget={budget} key={index} />
-          ))}
+
+        <div className="mt-10 bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+          <h2 className="text-2xl font-bold mb-6 text-orange-400">Quick Actions</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <Link href="/dashboard/budgets" className="bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
+              <CreditCard className="w-6 h-6 mr-3" />
+              <span>Add Budget</span>
+            </Link>
+            <Link href="/dashboard/expenses" className="bg-green-600 hover:bg-green-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
+              <ArrowUpRight className="w-6 h-6 mr-3" />
+              <span>Add Expense</span>
+            </Link>
+            <Link href="/dashboard/chatai" className="bg-purple-600 hover:bg-purple-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
+              <MessageSquare className="w-6 h-6 mr-3" />
+              <span>Chat AI</span>
+            </Link>
+            <Link href="/dashboard/budgets" className="bg-orange-600 hover:bg-orange-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
+              <PieChart className="w-6 h-6 mr-3" />
+              <span>View All</span>
+            </Link>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

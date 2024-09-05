@@ -54,33 +54,33 @@ function CardInfo({ budgetList }) {
   }
 
   return (
-    <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-      <div className="p-7 border rounded-lg flex items-center justify-between">
-        <div>
-          <h2 className="text-sm">Total Budget</h2>
-          <h2 className="text-2xl font-bold">
-          ksh {totalBudget}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 shadow-lg">
+        <h2 className="text-sm font-medium text-gray-400 mb-2">Total Budget</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-blue-400">
+            ksh {totalBudget}
           </h2>
+          <PiggyBank className="w-12 h-12 text-blue-500 bg-blue-500 bg-opacity-20 rounded-full p-2" />
         </div>
-        <PiggyBank className="w-12 h-12 bg-primary text-white rounded-full p-3" />
       </div>
-      <div className="p-7 border rounded-lg flex items-center justify-between">
-        <div>
-          <h2 className="text-sm">Total Spent</h2>
-          <h2 className="text-2xl font-bold">
-           ksh {totalSpent}
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 shadow-lg">
+        <h2 className="text-sm font-medium text-gray-400 mb-2">Total Spent</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-green-400">
+            ksh {totalSpent}
           </h2>
+          <ReceiptText className="w-12 h-12 text-green-500 bg-green-500 bg-opacity-20 rounded-full p-2" />
         </div>
-        <ReceiptText className="w-12 h-12 bg-primary text-white rounded-full p-3" />
       </div>
-      <div className="p-7 border rounded-lg flex items-center justify-between">
-        <div>
-          <h2 className="text-sm">No. of Budget</h2>
-          <h2 className="text-2xl font-bold">
-          {noOfBudget}
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 shadow-lg">
+        <h2 className="text-sm font-medium text-gray-400 mb-2">No. of Budgets</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-purple-400">
+            {noOfBudget}
           </h2>
+          <Wallet className="w-12 h-12 text-purple-500 bg-purple-500 bg-opacity-20 rounded-full p-2" />
         </div>
-        <Wallet className="w-12 h-12 bg-primary text-white rounded-full p-3" />
       </div>
     </div>
   );

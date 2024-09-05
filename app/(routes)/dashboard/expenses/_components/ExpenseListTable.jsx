@@ -38,7 +38,7 @@ function ExpenseListTable({ expensesList, refreshData, onDeleteExpense }) {
 
     return (
         <div className='mt-3'>
-            <div className='grid grid-cols-4 bg-slate-200 rounded-lg p-2'>
+            <div className='grid grid-cols-4 bg-gray-700 rounded-lg p-3 text-gray-300 font-medium'>
                 <h2>Name</h2>
                 <h2>Amount</h2>
                 <h2>Date</h2>
@@ -47,17 +47,17 @@ function ExpenseListTable({ expensesList, refreshData, onDeleteExpense }) {
 
             {expensesList.length > 0 ? (
                 expensesList.map((expense) => (
-                    <div key={expense.id} className='grid grid-cols-4 bg-slate-50 rounded-lg p-2'>
-                        <h2>{expense.name}</h2>
-                        <h2>ksh {expense.amount}</h2>
-                        <h2>{expense.createdAt}</h2>
-                        <button onClick={() => deleteExpense(expense)} className='bg-red-500 w-10 h-10 rounded-full flex items-center justify-center'>
-                            <Trash className='text-white' size={15} />
+                    <div key={expense.id} className='grid grid-cols-4 bg-gray-800 rounded-lg p-3 mt-2 items-center'>
+                        <h2 className="text-gray-300">{expense.name}</h2>
+                        <h2 className="text-green-400">ksh {expense.amount}</h2>
+                        <h2 className="text-gray-400">{expense.createdAt}</h2>
+                        <button onClick={() => deleteExpense(expense)} className='bg-red-500 hover:bg-red-600 w-8 h-8 rounded-full flex items-center justify-center transition duration-300'>
+                            <Trash className='text-white' size={14} />
                         </button>
                     </div>
                 ))
             ) : (
-                <div className='text-center py-4'>No expenses found</div>
+                <div className='text-center py-4 text-gray-400'>No expenses found</div>
             )}
         </div>
     )
