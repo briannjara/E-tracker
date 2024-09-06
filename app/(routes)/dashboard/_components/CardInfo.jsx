@@ -1,4 +1,4 @@
-import { PiggyBank, ReceiptText, Wallet, Lock } from "lucide-react";
+import { PiggyBank, ReceiptText, Wallet } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
 function CardInfo({ budgetList, budgetCount }) {
@@ -51,7 +51,7 @@ function CardInfo({ budgetList, budgetCount }) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 shadow-lg">
         <h2 className="text-sm font-medium text-gray-400 mb-2">Total Budget</h2>
         <div className="flex items-center justify-between">
@@ -61,31 +61,21 @@ function CardInfo({ budgetList, budgetCount }) {
           <PiggyBank className="w-12 h-12 text-blue-500 bg-blue-500 bg-opacity-20 rounded-full p-2" />
         </div>
       </div>
-      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 shadow-lg relative">
+      <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 shadow-lg">
         <h2 className="text-sm font-medium text-gray-400 mb-2">Total Spent</h2>
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-green-400">
-            ksh ****
+            ksh {totalSpent}
           </h2>
           <ReceiptText className="w-12 h-12 text-green-500 bg-green-500 bg-opacity-20 rounded-full p-2" />
         </div>
-        <Lock className="absolute top-2 right-2 w-4 h-4 text-yellow-400" />
-        <span className="absolute bottom-2 right-2 text-xs text-yellow-400">Premium feature</span>
       </div>
       <div className="p-6 bg-gray-800 rounded-xl border border-gray-700 shadow-lg">
-        <h2 className="text-sm font-medium text-gray-400 mb-2">No. of Budgets</h2>
+        <h2 className="text-sm font-medium text-gray-400 mb-2">Total Budgets</h2>
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-purple-400">
-            {noOfBudget} / 3
-          </h2>
+          <h2 className="text-2xl font-bold text-purple-400">{noOfBudget}</h2>
           <Wallet className="w-12 h-12 text-purple-500 bg-purple-500 bg-opacity-20 rounded-full p-2" />
         </div>
-        {budgetCount >= 3 && (
-          <div className="mt-2 text-xs text-yellow-400 flex items-center">
-            <Lock className="w-3 h-3 mr-1" />
-            Upgrade to create more budgets
-          </div>
-        )}
       </div>
     </div>
   );

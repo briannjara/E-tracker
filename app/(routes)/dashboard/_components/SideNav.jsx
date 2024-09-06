@@ -14,7 +14,7 @@ const SideNav = () => {
         { name: "Dashboard", icon: LayoutGrid, path: "/dashboard" },
         { name: "Budget", icon: PiggyBank, path: "/dashboard/budgets" },
         { name: "Expenses", icon: ReceiptText, path: "/dashboard/expenses" },
-        { name: "Chat AI", icon: MessageSquare, path: "/dashboard/chatai", premium: true },
+        { name: "Chat AI", icon: MessageSquare, path: "/dashboard/chatai" },
         { name: "Upgrade", icon: ShieldPlus, path: "/dashboard/upgrade" }
     ]
 
@@ -37,21 +37,13 @@ const SideNav = () => {
                 <ul className='space-y-2'>
                     {menuList.map((item, index) => (
                         <li key={index}>
-                            {item.premium ? (
-                                <div className={`flex items-center gap-4 p-2 rounded-lg text-gray-500 cursor-not-allowed`}>
-                                    <item.icon size={20} />
-                                    <span>{item.name}</span>
-                                    <Lock className="ml-auto h-4 w-4 text-yellow-400" />
-                                </div>
-                            ) : (
-                                <Link 
-                                    href={item.path}
-                                    className={`flex items-center gap-4 p-2 rounded-lg ${pathname === item.path ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
-                                >
-                                    <item.icon size={20} />
-                                    <span>{item.name}</span>
-                                </Link>
-                            )}
+                            <Link 
+                                href={item.path}
+                                className={`flex items-center gap-4 p-2 rounded-lg ${pathname === item.path ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
+                            >
+                                <item.icon size={20} />
+                                <span>{item.name}</span>
+                            </Link>
                         </li>
                     ))}
                 </ul>

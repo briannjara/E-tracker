@@ -10,7 +10,7 @@ import BarChartDashboard from "./_components/BarChartDashboard";
 import { BudgetItem } from "./budgets/_components/BudgetItem";
 import ExpensesListTable from "./../dashboard/expenses/_components/ExpenseListTable";
 import Link from "next/link";
-import { PieChart, CreditCard, ArrowUpRight, MessageSquare, TrendingUp, Lock } from 'lucide-react';
+import { PieChart, CreditCard, ArrowUpRight, MessageSquare, TrendingUp } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -90,24 +90,14 @@ const Dashboard = () => {
         <CardInfo budgetList={budgetList} budgetCount={budgetList.length} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
-          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 relative">
+          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
             <h2 className="text-2xl font-bold mb-6 text-blue-400">Budget Overview</h2>
             <BarChartDashboard budgetList={budgetList} />
           </div>
           
-          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 relative">
+          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
             <h2 className="text-2xl font-bold mb-6 text-green-400">Recent Expenses</h2>
-            <div className="relative">
-              <div className="opacity-50">
-                <ExpensesListTable expensesList={expensesList.slice(0, 5)} />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70">
-                <div className="text-center">
-                  <Lock className="w-12 h-12 text-yellow-400 mx-auto mb-2" />
-                  <p className="text-white text-sm">Premium feature</p>
-                </div>
-              </div>
-            </div>
+            <ExpensesListTable expensesList={expensesList.slice(0, 5)} />
           </div>
         </div>
         
@@ -131,14 +121,10 @@ const Dashboard = () => {
               <ArrowUpRight className="w-6 h-6 mb-2" />
               <span>Add Expense</span>
             </Link>
-            <div className="relative">
-              <div className="w-full bg-purple-600 opacity-70 cursor-not-allowed text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
-                <MessageSquare className="w-6 h-6 mb-2" />
-                <span>Chat AI</span>
-              </div>
-              <Lock className="absolute top-2 right-2 w-4 h-4 text-yellow-400" />
-              <span className="absolute bottom-0 left-0 right-0 text-center text-xs text-yellow-400 bg-gray-800 bg-opacity-75 py-1">Premium feature</span>
-            </div>
+            <Link href="/dashboard/chatai" className="bg-purple-600 hover:bg-purple-700 text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
+              <MessageSquare className="w-6 h-6 mb-2" />
+              <span>Chat AI</span>
+            </Link>
             <Link href="/dashboard/budgets" className="bg-orange-600 hover:bg-orange-700 text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
               <PieChart className="w-6 h-6 mb-2" />
               <span>View All</span>

@@ -10,7 +10,7 @@ export default function Navbar() {
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "Budgets", href: "/dashboard/budgets", icon: DollarSign },
     { name: "Expenses", href: "/dashboard/expenses", icon: BarChart2 },
-    { name: "Chat AI", href: "/dashboard/chatai", icon: MessageSquare, premium: true },
+    { name: "Chat AI", href: "/dashboard/chatai", icon: MessageSquare },
     { name: "Upgrade", href: "/dashboard/upgrade", icon: TrendingUp },
   ];
 
@@ -26,23 +26,13 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {menuItems.map((item) => (
-                item.premium ? (
-                  <div
-                    key={item.name}
-                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-500 cursor-not-allowed flex items-center"
-                  >
-                    {item.name}
-                    <Lock className="ml-1 h-3 w-3 text-yellow-400" />
-                  </div>
-                ) : (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 flex items-center"
-                  >
-                    {item.name}
-                  </Link>
-                )
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 flex items-center"
+                >
+                  {item.name}
+                </Link>
               ))}
             </div>
           </div>
@@ -64,30 +54,17 @@ export default function Navbar() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {menuItems.map((item) => (
-              item.premium ? (
-                <div
-                  key={item.name}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-500 cursor-not-allowed"
-                >
-                  <div className="flex items-center">
-                    <item.icon className="mr-3 h-5 w-5" />
-                    {item.name}
-                    <Lock className="ml-1 h-3 w-3 text-yellow-400" />
-                  </div>
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+                onClick={() => setIsOpen(false)}
+              >
+                <div className="flex items-center">
+                  <item.icon className="mr-3 h-5 w-5" />
+                  {item.name}
                 </div>
-              ) : (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div className="flex items-center">
-                    <item.icon className="mr-3 h-5 w-5" />
-                    {item.name}
-                  </div>
-                </Link>
-              )
+              </Link>
             ))}
           </div>
           <div className="pt-4 pb-3 border-t border-gray-700">

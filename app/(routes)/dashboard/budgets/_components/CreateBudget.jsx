@@ -9,8 +9,6 @@ import { useUser } from "@clerk/nextjs";
 import { Budgets } from "../../../../../utils/schema";
 import { toast } from "sonner";
 import { cn } from "../../../../../lib/utils";
-import { Lock } from "lucide-react";
-import { eq, sql } from "drizzle-orm";
 
 function CreateBudget({refreshData}) {
 	const [name, setName] = useState("");
@@ -19,27 +17,8 @@ function CreateBudget({refreshData}) {
 	const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
 	const [Loading, setLoading] = useState(false);
 	const { user } = useUser();
-	const [budgetCount, setBudgetCount] = useState(0);
-
-	useEffect(() => {
-		const fetchBudgetCount = async () => {
-			if (user) {
-				const result = await db
-					.select({ count: sql`count(*)` })
-					.from(Budgets)
-					.where(eq(Budgets.createdBy, user.primaryEmailAddress?.emailAddress));
-				setBudgetCount(result[0].count);
-			}
-		};
-		fetchBudgetCount();
-	}, [user]);
 
 	const addNewBudget = async () => {
-		if (budgetCount >= 3) {
-			toast.error("Free users can only create up to 3 budgets. Please upgrade to create more.");
-			return;
-		}
-
 		setLoading(true);
 		try {
 			await db.insert(Budgets).values({
@@ -113,19 +92,13 @@ function CreateBudget({refreshData}) {
 				<DialogFooter className="sm:justify-start">
 					<DialogClose asChild>
 						<Button className="w-full rounded-md"
-							disabled={!name || !amount || Loading || budgetCount >= 3}
+							disabled={!name || !amount || Loading}
 							onClick={addNewBudget}
 							>
 							{Loading ? "Creating..." : "Create Budget"}
 						</Button>
 					</DialogClose>
 				</DialogFooter>
-				{budgetCount >= 3 && (
-					<div className="mt-4 text-center text-sm text-red-500 flex items-center justify-center">
-						<Lock className="w-4 h-4 mr-2" />
-						Free users can only create up to 3 budgets. Please upgrade to create more.
-					</div>
-				)}
 			</DialogContent>
 		</Dialog>
 	);
