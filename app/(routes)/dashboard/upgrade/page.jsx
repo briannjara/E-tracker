@@ -12,7 +12,7 @@ export default function Upgrade() {
     {
       name: "Free Plan",
       description: "Great for getting started",
-      price: "$0",
+      price: "ksh.0",
       features: [
         "Manage up to 3 budgets",
         "Track expenses manually",
@@ -26,7 +26,7 @@ export default function Upgrade() {
     {
       name: "Premium Plan",
       description: "For serious financial management",
-      price: "$9.99/month",
+      price: "ksh.100/month",
       features: [
         "Unlimited budgets",
         "Automated expense tracking",
