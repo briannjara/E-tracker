@@ -73,21 +73,22 @@ const AddExpense = ({budgetId, user, refreshData, budgetInfo}) => {
         </div>
       )}
       <div>
-        <h2 className="text-black font-medium mb-2">Expense Name</h2>
+        <h2 className="text-white font-medium mb-2">Expense Name</h2>
         <Input
           placeholder="e.g groceries"
           onChange={(e) => setName(e.target.value.toLowerCase())}
-          className="rounded-md"
+          className="rounded-md text-black"
           value={name}
         />
       </div>
       <div>
-        <h2 className="text-black font-medium mb-2">Expense Amount</h2>
+        <h2 className="text-white font-medium mb-2">Expense Amount</h2>
         <Input
           placeholder="e.g 500"
           onChange={(e) => setAmount(e.target.value)}
-          className="rounded-md"
+          className="rounded-md text-black"
           value={amount}
+          type="number"
         />
       </div>
       <Button disabled={!name || !amount || Loading || wouldExceedBudget}

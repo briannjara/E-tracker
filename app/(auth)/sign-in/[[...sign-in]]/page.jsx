@@ -1,4 +1,4 @@
-import { SignUp } from "@clerk/nextjs";
+import { SignIn } from "@clerk/nextjs";
 import Logo from "../../../_components/Logo";
 
 export default function Page() {
@@ -16,11 +16,11 @@ export default function Page() {
             <Logo />
 
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Join FinanSmart: Start Your Financial Journey 🚀
+              Welcome to FinanSmart: Your Financial Compass 🧭
             </h2>
 
             <p className="mt-4 leading-relaxed text-gray-300">
-              Sign up now to access powerful tools and insights for smarter financial management.
+              Manage your finances smarter with our intuitive tools and expert insights.
             </p>
           </div>
         </section>
@@ -31,16 +31,16 @@ export default function Page() {
               <Logo />
 
               <h1 className="mt-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                Join FinanSmart: Start Your Financial Journey 🚀
+                Welcome to FinanSmart: Your Financial Compass 🧭
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-300">
-                Sign up now to access powerful tools and insights for smarter financial management.
+                Manage your finances smarter with our intuitive tools and expert insights.
               </p>
             </div>
 
             <div className="mt-8 bg-gray-800 p-8 shadow-lg rounded-lg border border-gray-700">
-              <SignUp appearance={{
+              <SignIn appearance={{
                 elements: {
                   formButtonPrimary: 
                     'bg-blue-600 hover:bg-blue-700 text-sm normal-case',
