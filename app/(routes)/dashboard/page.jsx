@@ -10,7 +10,7 @@ import BarChartDashboard from "./_components/BarChartDashboard";
 import { BudgetItem } from "./budgets/_components/BudgetItem";
 import ExpensesListTable from "./../dashboard/expenses/_components/ExpenseListTable";
 import Link from "next/link";
-import { PieChart, CreditCard, ArrowUpRight, MessageSquare } from 'lucide-react';
+import { PieChart, CreditCard, ArrowUpRight, MessageSquare, TrendingUp, Lock } from 'lucide-react';
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -87,24 +87,27 @@ const Dashboard = () => {
   return (
     <div className="bg-gray-900 min-h-screen text-white">
       <main className="p-6 md:p-10">
-        <div className="bg-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-700">
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-            Welcome back, {user.firstName}!
-          </h1>
-          <p className="text-xl text-gray-300">Here's a summary of your finances</p>
-        </div>
-
-        <CardInfo budgetList={budgetList} />
+        <CardInfo budgetList={budgetList} budgetCount={budgetList.length} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
-          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 relative">
             <h2 className="text-2xl font-bold mb-6 text-blue-400">Budget Overview</h2>
             <BarChartDashboard budgetList={budgetList} />
           </div>
           
-          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+          <div className="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 relative">
             <h2 className="text-2xl font-bold mb-6 text-green-400">Recent Expenses</h2>
-            <ExpensesListTable expensesList={expensesList.slice(0, 5)} />
+            <div className="relative">
+              <div className="opacity-50">
+                <ExpensesListTable expensesList={expensesList.slice(0, 5)} />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-70">
+                <div className="text-center">
+                  <Lock className="w-12 h-12 text-yellow-400 mx-auto mb-2" />
+                  <p className="text-white text-sm">Premium feature</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -119,22 +122,30 @@ const Dashboard = () => {
 
         <div className="mt-10 bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
           <h2 className="text-2xl font-bold mb-6 text-orange-400">Quick Actions</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <Link href="/dashboard/budgets" className="bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
-              <CreditCard className="w-6 h-6 mr-3" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            <Link href="/dashboard/budgets" className="bg-blue-600 hover:bg-blue-700 text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
+              <CreditCard className="w-6 h-6 mb-2" />
               <span>Add Budget</span>
             </Link>
-            <Link href="/dashboard/expenses" className="bg-green-600 hover:bg-green-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
-              <ArrowUpRight className="w-6 h-6 mr-3" />
+            <Link href="/dashboard/expenses" className="bg-green-600 hover:bg-green-700 text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
+              <ArrowUpRight className="w-6 h-6 mb-2" />
               <span>Add Expense</span>
             </Link>
-            <Link href="/dashboard/chatai" className="bg-purple-600 hover:bg-purple-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
-              <MessageSquare className="w-6 h-6 mr-3" />
-              <span>Chat AI</span>
-            </Link>
-            <Link href="/dashboard/budgets" className="bg-orange-600 hover:bg-orange-700 text-white py-4 px-6 rounded-lg flex items-center justify-center transition duration-300 font-semibold text-lg">
-              <PieChart className="w-6 h-6 mr-3" />
+            <div className="relative">
+              <div className="w-full bg-purple-600 opacity-70 cursor-not-allowed text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
+                <MessageSquare className="w-6 h-6 mb-2" />
+                <span>Chat AI</span>
+              </div>
+              <Lock className="absolute top-2 right-2 w-4 h-4 text-yellow-400" />
+              <span className="absolute bottom-0 left-0 right-0 text-center text-xs text-yellow-400 bg-gray-800 bg-opacity-75 py-1">Premium feature</span>
+            </div>
+            <Link href="/dashboard/budgets" className="bg-orange-600 hover:bg-orange-700 text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
+              <PieChart className="w-6 h-6 mb-2" />
               <span>View All</span>
+            </Link>
+            <Link href="/dashboard/upgrade" className="bg-yellow-600 hover:bg-yellow-700 text-white py-4 px-4 rounded-lg flex flex-col items-center justify-center transition duration-300 font-semibold text-sm sm:text-base">
+              <TrendingUp className="w-6 h-6 mb-2" />
+              <span>Upgrade</span>
             </Link>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Lock } from 'lucide-react'
 import { UserButton } from '@clerk/nextjs'
 import SearchBar from '../../../_components/SearchBar'
 import Logo from '../../../_components/Logo'
@@ -15,7 +15,8 @@ function DashboardHeader() {
     { name: "Dashboard", path: "/dashboard" },
     { name: "Budget", path: "/dashboard/budgets" },
     { name: "Expenses", path: "/dashboard/expenses" },
-    { name: "Chat AI", path: "/dashboard/chatai" }
+    { name: "Chat AI", path: "/dashboard/chatai", premium: true },
+    { name: "Upgrade", path: "/dashboard/upgrade" }
   ]
 
   const handleSearch = async (searchTerm) => {
@@ -47,14 +48,24 @@ function DashboardHeader() {
             <SearchBar onSearch={handleSearch} />
           </div>
           {menuList.map((item, index) => (
-            <Link 
-              key={index} 
-              href={item.path}
-              className={`block py-2 px-4 rounded-md ${pathname === item.path ? 'bg-blue-600 text-white font-medium' : 'text-gray-300 hover:bg-gray-800'}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
+            item.premium ? (
+              <div 
+                key={index}
+                className={`block py-2 px-4 rounded-md text-gray-500 cursor-not-allowed flex items-center justify-between`}
+              >
+                <span>{item.name}</span>
+                <Lock className="h-4 w-4 text-yellow-400" />
+              </div>
+            ) : (
+              <Link 
+                key={index} 
+                href={item.path}
+                className={`block py-2 px-4 rounded-md ${pathname === item.path ? 'bg-blue-600 text-white font-medium' : 'text-gray-300 hover:bg-gray-800'} flex items-center justify-between`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span>{item.name}</span>
+              </Link>
+            )
           ))}
         </div>
       )}
