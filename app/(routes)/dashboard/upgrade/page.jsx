@@ -27,7 +27,7 @@ export default function Upgrade() {
     {
       name: "Premium Plan",
       description: "For serious financial management",
-      price: "ksh.99/month",
+      price: "$9.99/month",
       features: [
         "Unlimited budgets",
         "Automated expense tracking",
