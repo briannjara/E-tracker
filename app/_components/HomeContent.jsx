@@ -3,8 +3,7 @@
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { ArrowRight, DollarSign, BarChart2, Lock, Play } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+
 import Logo from "./Logo";
 
 export default function HomeContent() {
@@ -23,14 +22,7 @@ export default function HomeContent() {
     <div className="min-h-screen flex flex-col bg-gray-900 text-white">
       <header className="container mx-auto px-4 py-6 flex justify-between items-center">
         <Logo />
-        <nav className="hidden md:flex space-x-8">
-          <Link className="hover:text-blue-400 transition-colors" href="#">
-            Features
-          </Link>
-          <Link className="hover:text-blue-400 transition-colors" href="#">
-            About
-          </Link>
-        </nav>
+        
         <button
           onClick={handleGetStarted}
           className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
