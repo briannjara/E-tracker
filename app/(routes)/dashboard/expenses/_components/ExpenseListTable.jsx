@@ -42,28 +42,39 @@ function ExpenseListTable({ expensesList, refreshData, onDeleteExpense, userEmai
     }
 
     return (
-        <div className='mt-3'>
-            <div className='grid grid-cols-4 bg-gray-700 rounded-lg p-3 text-gray-300 font-medium'>
-                <h2>Name</h2>
-                <h2>Amount</h2>
-                <h2>Date</h2>
-                <h2>Action</h2>   
-            </div>
-
-            {expensesList.length > 0 ? (
-                expensesList.map((expense) => (
-                    <div key={expense.id} className='grid grid-cols-4 bg-gray-800 rounded-lg p-3 mt-2 items-center'>
-                        <h2 className="text-gray-300">{expense.name}</h2>
-                        <h2 className="text-green-400">ksh {expense.amount}</h2>
-                        <h2 className="text-gray-400">{expense.createdAt}</h2>
-                        <button onClick={() => deleteExpense(expense)} className='bg-red-500 hover:bg-red-600 w-8 h-8 rounded-full flex items-center justify-center transition duration-300'>
-                            <Trash className='text-white' size={14} />
-                        </button>
-                    </div>
-                ))
-            ) : (
-                <div className='text-center py-4 text-gray-400'>No expenses found</div>
-            )}
+        <div className='mt-3 overflow-x-auto'>
+            <table className='w-full min-w-[600px]'>
+                <thead>
+                    <tr className='bg-gray-700 text-gray-300 font-medium'>
+                        <th className='p-3 text-left'>Name</th>
+                        <th className='p-3 text-left'>Amount</th>
+                        <th className='p-3 text-left'>Date</th>
+                        <th className='p-3 text-left'>Budget</th>
+                        <th className='p-3 text-left'>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {expensesList.length > 0 ? (
+                        expensesList.map((expense) => (
+                            <tr key={expense.id} className='bg-gray-800 border-b border-gray-700'>
+                                <td className='p-3 text-gray-300'>{expense.name}</td>
+                                <td className='p-3 text-green-400'>ksh {expense.amount}</td>
+                                <td className='p-3 text-gray-400'>{expense.createdAt}</td>
+                                <td className='p-3 text-gray-300'>{expense.budgetName}</td>
+                                <td className='p-3'>
+                                    <button onClick={() => deleteExpense(expense)} className='bg-red-500 hover:bg-red-600 w-8 h-8 rounded-full flex items-center justify-center transition duration-300'>
+                                        <Trash className='text-white' size={14} />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan={5} className='text-center py-4 text-gray-400'>No expenses found</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
         </div>
     )
 }

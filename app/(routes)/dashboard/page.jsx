@@ -50,7 +50,7 @@ const Dashboard = () => {
       })
       .from(Expenses)
       .innerJoin(Budgets, eq(Budgets.id, Expenses.budgetId))
-      .where(eq(Budgets.createdBy, user.primaryEmailAddress?.emailAddress))
+      .where(eq(Expenses.createdBy, user.primaryEmailAddress?.emailAddress))
       .orderBy(desc(Expenses.id))
       .limit(5);
 
@@ -71,7 +71,7 @@ const Dashboard = () => {
 
   if (budgetList.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
         <h2 className="text-3xl font-bold mb-4">Welcome to Your Dashboard!</h2>
         <p className="text-xl text-gray-300 mb-8">It looks like you haven't created any budgets yet.</p>
         <Link 
@@ -85,8 +85,8 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white">
-      <main className="p-6 md:p-10">
+    <div className="bg-gray-900 min-h-screen flex flex-col text-white">
+      <main className="flex-grow p-6 md:p-10">
         <CardInfo budgetList={budgetList} budgetCount={budgetList.length} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
