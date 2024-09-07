@@ -1,16 +1,21 @@
 import { Trash } from 'lucide-react'
 import React from 'react'
 import { db } from '../../../../../utils/dbConfig'
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { Expenses } from '../../../../../utils/schema'
 import { toast } from 'sonner'
 
-function ExpenseListTable({ expensesList, refreshData, onDeleteExpense }) {
+function ExpenseListTable({ expensesList, refreshData, onDeleteExpense, userEmail }) {
 
     const deleteExpense = async (expense) => {
         try {
             const result = await db.delete(Expenses)
-                .where(eq(Expenses.id, expense.id))
+                .where(
+                    and(
+                        eq(Expenses.id, expense.id),
+                        eq(Expenses.createdBy, userEmail)
+                    )
+                )
                 .returning()
 
             if (result.length > 0) {

@@ -49,7 +49,7 @@ const ExpensesScreen = ({ params }) => {
       .where(
         and(
           eq(Expenses.budgetId, params.id),
-          eq(Expenses.createdBy, user.primaryEmailAddress?.emailAddress) // Update this line
+          eq(Expenses.createdBy, user.primaryEmailAddress?.emailAddress)
         )
       )
       .orderBy(desc(Expenses.id));
@@ -171,6 +171,7 @@ const ExpensesScreen = ({ params }) => {
           expensesList={expensesList}
           refreshData={getBudgetInfo}
           onDeleteExpense={handleDeleteExpense}
+          userEmail={user.primaryEmailAddress?.emailAddress}
         />
       </div>
     </div>
