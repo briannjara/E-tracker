@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../../../../utils/dbConfig";
 import { Budgets, Expenses } from "../../../../../utils/schema";
-import { desc, eq, getTableColumns, sql } from "drizzle-orm";
+import { desc, eq, getTableColumns, sql, and } from "drizzle-orm";
 import { useUser } from "@clerk/nextjs";
 import { BudgetItem } from "../../budgets/_components/BudgetItem";
 import AddExpense from "./../_components/AddExpense";
@@ -40,13 +40,21 @@ const ExpensesScreen = ({ params }) => {
 
   // get latest
   const getExpensesList = async () => {
+    if (!user) return;
+    
     const result = await db
       .select()
       .from(Expenses)
-      .where(eq(Expenses.budgetId, params.id))
+      .innerJoin(Budgets, eq(Expenses.budgetId, Budgets.id))
+      .where(
+        and(
+          eq(Expenses.budgetId, params.id),
+          eq(Expenses.createdBy, user.primaryEmailAddress?.emailAddress) // Update this line
+        )
+      )
       .orderBy(desc(Expenses.id));
 
-    setExpensesList(result); // Set the state with fetched data
+    setExpensesList(result.map(r => r.expenses)); // Adjust this based on your actual result structure
   };
 
   const getBudgetInfo = async () => {

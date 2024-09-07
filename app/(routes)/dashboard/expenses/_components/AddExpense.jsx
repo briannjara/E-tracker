@@ -33,11 +33,12 @@ const AddExpense = ({budgetId, user, refreshData, budgetInfo}) => {
 
     setLoading(true);
     const result = await db.insert(Expenses).values({
-      name:name,
-      amount:amount,
-      budgetId:budgetId,
-      createdAt:moment().format("YYYY-MM-DD HH:mm")
-    }).returning({insertedId:Expenses.id});
+      name: name,
+      amount: amount,
+      budgetId: budgetId,
+      createdAt: moment().format("YYYY-MM-DD HH:mm"),
+      createdBy: user.primaryEmailAddress?.emailAddress, // Add this line
+    }).returning({insertedId: Expenses.id});
     setName("");
     setAmount("");
     
