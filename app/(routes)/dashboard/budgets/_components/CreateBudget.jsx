@@ -43,7 +43,12 @@ function CreateBudget({refreshData}) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button className="bg-blue-600 hover:bg-blue-700">Create New Budget</Button>
+				<Button className="w-full h-[175px] bg-slate-700 hover:bg-blue-900 text-white text-xl font-semibold rounded-lg shadow-md transition-colors duration-200">
+					<span className="flex flex-col items-center justify-center">
+						<span className="text-4xl mb-2">+</span>
+						Create New Budget
+					</span>
+				</Button>
 			</DialogTrigger>
 			<DialogContent className={cn(
 				"max-w-md w-full mx-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg p-6",

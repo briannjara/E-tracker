@@ -24,12 +24,15 @@ import { cn } from "../../../../../lib/utils";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import EditBudget from "./../_components/EditBudget";
+import { HelpCircle } from "lucide-react"; // Add this import
+import TourGuide from "../_components/TourGuide"; // Add this import
 
 const ExpensesScreen = ({ params }) => {
   const { user, isLoaded } = useUser();
   const [budgetInfo, setBudgetInfo] = useState(null);
   const [expensesList, setExpensesList] = useState([]);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -118,6 +121,10 @@ const ExpensesScreen = ({ params }) => {
     }
   };
 
+  const startTour = () => {
+    setIsTourOpen(true);
+  };
+
   if (!isLoaded || !user) {
     return <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">Loading...</div>;
   }
@@ -192,6 +199,7 @@ const ExpensesScreen = ({ params }) => {
           />
         </div>
       </div>
+      <TourGuide isOpen={isTourOpen} onClose={() => setIsTourOpen(false)} />
     </div>
   );
 };
