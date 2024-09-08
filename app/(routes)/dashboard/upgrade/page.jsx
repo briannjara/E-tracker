@@ -12,7 +12,7 @@ export default function Upgrade() {
     {
       name: "Free Plan",
       description: "Great for getting started",
-      price: "ksh.0",
+      price: "coming soon",
       features: [
         "Manage up to 3 budgets",
         "Track expenses manually",
@@ -27,7 +27,7 @@ export default function Upgrade() {
     {
       name: "Premium Plan",
       description: "For serious financial management",
-      price: "$9.99/month",
+      price: "coming soon",
       features: [
         "Unlimited budgets",
         "Automated expense tracking",
@@ -37,7 +37,7 @@ export default function Upgrade() {
         "Data export options",
         "AI chat assistant"
       ],
-      buttonText: "Upgrade Now",
+      buttonText: "coming soon!",
       buttonColor: "bg-green-500 hover:bg-green-600",
       bgColor: "bg-gray-700",
     }

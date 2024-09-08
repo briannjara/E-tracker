@@ -65,9 +65,7 @@ export default function HomeContent() {
                   <h3 className="text-xl font-bold mb-1">FinanSmart Dashboard</h3>
                   <p className="text-sm text-gray-300">Experience intuitive financial management</p>
                 </div>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition duration-300">
-                  <Play className="w-6 h-6" />
-                </button>
+               
               </div>
             </div>
             <div className="absolute -bottom-4 -right-4 bg-blue-600 text-white p-4 rounded-lg shadow-lg transform rotate-3">
@@ -118,6 +116,9 @@ export default function HomeContent() {
                 &copy; 2024 FinanSmart. All rights reserved.
               </span>
             </div>
+            <span>
+              <a className="text-sm text-gray-400 hover:text-blue-600" href="https://wa.me/+254723752098" target="_blank" rel="noopener noreferrer" >Developed by Njaramba&reg;</a>
+            </span>
           </div>
         </div>
       </footer>

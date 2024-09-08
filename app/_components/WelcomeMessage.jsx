@@ -1,6 +1,6 @@
 import React from "react";
 import { useUser } from "@clerk/nextjs";
-import { AlertCircleIcon } from "lucide-react";
+import { AlertCircleIcon, AlertTriangleIcon } from "lucide-react";
 
 const WelcomeMessage = () => {
   const { user } = useUser();
@@ -15,11 +15,23 @@ const WelcomeMessage = () => {
             Welcome back, {user.fullName}!
           </span>{" "}
           <span>👋</span>
-        </h1> 
-        
-        <div className="flex items-center gap-2 text-slate-400 font-semibold">
-          <AlertCircleIcon className="w-5 h-5 text-blue-400" />
-          <p>Click the start tour button below in the dashboard to start the tour</p>
+        </h1>
+
+        <div className="flex items-start gap-5 p-4">
+          <AlertCircleIcon className="w-10 h-10 text-blue-400 flex-shrink-0" />
+          <div className="flex-1 space-y-3">
+            <p className="font-semibold text-xl text-white">
+              Click the start tour button below in the dashboard to start the
+              tour
+            </p>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-yellow-200 bg-yellow-500/10 p-3 rounded-md flex items-center gap-3">
+                <AlertTriangleIcon className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                This app is currently in beta. Some features may be experimental
+                or under development.
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

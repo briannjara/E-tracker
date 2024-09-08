@@ -38,17 +38,18 @@ const ExpensesPage = () => {
 	}, [isLoaded, user])
 
 	if (!isLoaded || isLoading) {
-		return <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">Loading...</div>
+		return <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">Loading...�</div>
 	}
 
 	return (
-		<div className="bg-gray-900 min-h-screen flex flex-col text-white">
+		<div className="bg-gray-900 min-h-screen flex flex-col text-white overflow-x-hidden">
 			<div className="flex-grow p-6 md:p-10">
 				<h1 className="text-3xl font-bold mb-6">Your Expenses</h1>
 				<ExpenseListTable 
 					expensesList={expensesList} 
 					refreshData={fetchExpenses} 
 					userEmail={user.primaryEmailAddress?.emailAddress}
+					className="overflow-x-auto"
 				/>
 			</div>
 		</div>

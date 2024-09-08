@@ -11,7 +11,7 @@ import { BudgetItem } from "./budgets/_components/BudgetItem";
 import ExpensesListTable from "./../dashboard/expenses/_components/ExpenseListTable";
 import Link from "next/link";
 import { PieChart, CreditCard, ArrowUpRight, MessageSquare, TrendingUp } from 'lucide-react';
-import WelcomeMessage from "../../_components/WelcomeMessage";
+
 import TourGuide from "./expenses/_components/TourGuide";
 
 const Dashboard = () => {
