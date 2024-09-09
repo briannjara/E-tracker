@@ -18,7 +18,7 @@ const TourGuide = ({ isOpen, onClose }) => {
     },
     {
       target: '.your-budgets',
-      content: 'Here you can see all your current budgets and their status.',
+      content: 'Here you can see all your current budgets and you can press them to create expenses within them.',
     },
     {
       target: '.quick-actions',
